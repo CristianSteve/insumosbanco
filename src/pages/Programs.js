@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { Fab } from "@mui/material";
-//import { Search } from "../components/Search";
+import { Search } from "../components/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RadioButton from "../components/RadioButton";
 import useGetPrograms from "../hooks/useGetPrograms";
@@ -18,36 +18,43 @@ const ContainerMain = styled.div`
 
 const HeadMain = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 5px;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 `;
 
 const Programs = () => {
-  const { getDataPrograms, getFilterData, listPrograms, loadingPrograms } = useGetPrograms();
+  const { getDataPrograms, getFilterData, getSearchData, listPrograms, initialData, loadingPrograms } =
+    useGetPrograms();
   const { getDatatipos, listTipos } = useServiceTipos();
   const [addItem, setAddItem] = useState(false);
-  const [valueRadio, setValueRadio] = useState();
+  const [valueRadio, setValueRadio] = useState("All");
+  const [valueSearch, setValueSearch] = useState("");
 
   useEffect(() => {
     getDataPrograms();
     getDatatipos();
     // eslint-disable-next-line
   }, []);
-  
-  useEffect(()=>{
-    console.log("entro", valueRadio)
-    if(valueRadio)
-      getFilterData("Tipo", valueRadio)
-      // eslint-disable-next-line
-  },[valueRadio])
 
+  useEffect(() => {
+    if (valueRadio === "All") getDataPrograms();
+    else getFilterData("Tipo", valueRadio);
+    // eslint-disable-next-line
+  }, [valueRadio]);
+
+  useEffect(() => {
+    if (valueSearch) getSearchData(initialData, valueSearch, valueRadio);
+    // eslint-disable-next-line
+  }, [valueSearch]);
   return (
     <ContainerMain>
       <HeadMain>
-        {/* <Search placeholder={"Busqueda notas BBVA"} name={"programs"} /> */}
-        <RadioButton valueRadio={setValueRadio}
-          items={listTipos.map(({valor}) => ({value: valor, label: valor}))}
+        <Search placeholder={"Busqueda"} name={"programs"} value={valueSearch} setValue={setValueSearch} />
+        <RadioButton
+          valueRadio={setValueRadio}
+          items={listTipos.map(({ valor }) => ({ value: valor, label: valor }))}
         />
       </HeadMain>
       <TablaGrid rows={listPrograms} loading={loadingPrograms} />
@@ -60,7 +67,7 @@ const Programs = () => {
         <FontAwesomeIcon icon={faAdd} />
       </Fab>
       <PopUpEmpty show={addItem} hide={setAddItem} width={"50vw"} height={"60vh"}>
-        <Tablas hide={setAddItem}/>
+        <Tablas hide={setAddItem} />
       </PopUpEmpty>
     </ContainerMain>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -14,13 +14,13 @@ const Find = styled.input`
   transition: width 0.6s ease;
   z-index: 10;
   border-radius: 10px;
-  background: #f7f7f7;
+  background: #fdfdfd;
 `;
 
 const ContentFind = styled.div`
-  background: #f7f7f7;
+  background: #fdfdfd;
   height: 49px;
-  box-shadow: 0 1px 10px 0px #ccc;
+  box-shadow: 0 1px 5px 0px #ccc;
   width: 380px;
   border-radius: 10px;
   display: flex;
@@ -33,8 +33,7 @@ const ContentFind = styled.div`
   }
 `;
 
-export const Search = ({ placeholder, name }) => {
-  const [value, setValue] = useState("");
+export const Search = ({ placeholder, name, value, setValue }) => {
 
   return (
     <ContentFind>
@@ -45,6 +44,7 @@ export const Search = ({ placeholder, name }) => {
         value={value}
         name={name}
         onChange={(e) => setValue(e.target.value)}
+        autoComplete="off"
       />
     </ContentFind>
   );

@@ -35,7 +35,10 @@ const Tablas = ({hide}) => {
         setShowAlert((e) => !e);
         return;
       }
-      addDataFireBase(aplicativo, componente, tipo, descripcion);
+      const descripcionFormat = descripcion.toUpperCase().charAt(0) + descripcion.toLowerCase().slice(1, descripcion.length);
+      const componenteFormat = componente.toUpperCase();
+      const aplicativoFormat = aplicativo.toUpperCase();
+      addDataFireBase(aplicativoFormat, componenteFormat, tipo, descripcionFormat);
       setMessageAlert({
         status: "success",
         msg: `Se ha creado con exito el componente ${componente}`,

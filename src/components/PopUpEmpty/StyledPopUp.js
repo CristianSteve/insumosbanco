@@ -44,10 +44,12 @@ export const Pop = styled.div`
       display: grid;
       justify-content: end;
       font-size: 1.8rem;
-
+      
       label {
+        background-color: #f9f9f9;
         cursor: pointer;
-        padding: 0.5rem 0px;
+        padding: 0.5rem 10px;
+        border-radius: 12px;
       }
     }
     .body__item {

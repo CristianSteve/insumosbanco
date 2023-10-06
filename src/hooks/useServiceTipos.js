@@ -18,8 +18,7 @@ const useServiceTipos = () => {
       const list = tiposSnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
       });
-      console.log(list)
-      setlistTipos(list);
+      setlistTipos([{id:'1', valor: "All" }, ...list]);
     } catch (e) {
       console.log("Se ha generado una exepcion", e);
     }
@@ -33,12 +32,6 @@ const useServiceTipos = () => {
     querySnapshot.docs.map(doc => {
       return { id: doc.id, ...doc.data() };
     });
-    /*     const q = query(
-          collectionRef,
-          orderBy(valueColumn),
-          startAt(valueData),
-          endAt(valueData + "\uf8ff")
-        ); */
   };
 
   const addDataFireBase = async (valor) => {
