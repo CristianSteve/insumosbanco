@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridActionsCellItem, GridDeleteIcon } from "@mui/x-data-grid";
 import Alertas from "../components/Alertas";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faFileEdit, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 /*renderCell : () => <FontAwesomeIcon icon={faPen}/>*/
 
